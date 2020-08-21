@@ -12,6 +12,8 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 moveCharacter = Vector3.zero;
 
     private Vector3 moveVector;
+
+    public float speed = 8.0f;
     
     void Start()
     {
@@ -21,6 +23,8 @@ public class PlayerMotor : MonoBehaviour
     
     void Update()
     {
+        controller.Move(Vector3.forward * speed * Time.deltaTime);
+
         MoveXPos();
 
         CheckInputs();
