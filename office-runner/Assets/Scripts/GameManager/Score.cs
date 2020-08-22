@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Score : MonoBehaviour
 {
@@ -14,7 +15,13 @@ public class Score : MonoBehaviour
 
     private PlayerMotor playerM;
     public bool isDead = false;
-    
+
+    // Text on gui Score - Lvl and NxtLvl
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI lvlText;
+    public TextMeshProUGUI nxtLvlText;
+
+
     void Start()
     {
         playerM = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMotor>();
@@ -33,6 +40,11 @@ public class Score : MonoBehaviour
         // 
         score += Time.deltaTime * difficultyLevel;
         Debug.Log("Level: " + difficultyLevel + " -- Score: " + (int)score + " -- NextLvl: " + scoreToNextLevel);
+
+        // print score and lvl on Gui
+        scoreText.text = "Score: " + ((int)score).ToString();
+        lvlText.text = "Level: " + difficultyLevel.ToString();
+        nxtLvlText.text = "Next Lvl to: " + scoreToNextLevel.ToString();
         
     }
 
