@@ -12,26 +12,77 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 moveCharacter = Vector3.zero;
 
     private Vector3 moveVector;
-    
+
+    public float speed = 8.0f;
+
+    // Animation camera 
+    private float animationDuration = 2.0f;
+    private float startTime;
+
+    private bool isDead = false;    // is player is dead check
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        startTime = Time.time;
     }
 
     
     void Update()
     {
-        MoveXPos();
+
+        // the player cannot be moved until the camera animation is finished
+        if (Time.time - startTime < animationDuration)
+        {
+            controller.Move(Vector3.forward * speed * Time.deltaTime);
+            return;
+        }
+
+        // is player dead exit update
+        if (isDead)
+            return;
+
 
         CheckInputs();
 
+        MoveXPos();
+
+        moveCharacter.z = speed;
+
         controller.Move(moveCharacter * Time.deltaTime);
+
+        CheckCollision();
     }
 
+
+    #region Methods called in Update
+
+    private void CheckInputs()
+    {
+        /*
+         * Check if key left or right is dawn
+         * and can move in x axis
+         */
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && canMove && line > 0)
+        {
+            targetLine--;
+            canMove = false;
+            moveCharacter.x = -5;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow) && canMove && line < 2)
+        {
+            targetLine++;
+            canMove = false;
+            moveCharacter.x = 5;
+        }
+    }
 
 
     private void MoveXPos()
     {
+        /*
+         * setup x axis in moveCharacter 
+         */
         Vector3 pos = gameObject.transform.position;
         if (!line.Equals(targetLine))
         {
@@ -70,20 +121,25 @@ public class PlayerMotor : MonoBehaviour
     }
 
 
-
-    private void CheckInputs()
+    private void CheckCollision()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && canMove && line > 0)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 2f))
         {
-            targetLine--;
-            canMove = false;
-            moveCharacter.x = -5;
+            Death();
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && canMove && line < 2)
-        {
-            targetLine++;
-            canMove = false;
-            moveCharacter.x = 5;
-        }
+    }
+
+    private void Death()
+    {
+        isDead = true;
+        Debug.Log("Esta muerto!!");
+    }
+    #endregion
+
+    // change the speed by adding a passed value as a parameter
+    public void SetSpeed(float modifier)
+    {
+        speed += modifier;
     }
 }
