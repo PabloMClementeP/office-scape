@@ -21,9 +21,15 @@ public class PlayerMotor : MonoBehaviour
 
     private bool isDead = false;    // is player is dead check
 
+    private Score score;
+
+
+
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        score = GameObject.FindObjectOfType<Score>();
         startTime = Time.time;
     }
 
@@ -133,6 +139,7 @@ public class PlayerMotor : MonoBehaviour
     private void Death()
     {
         isDead = true;
+        score.isDead = true;
         Debug.Log("Esta muerto!!");
     }
     #endregion
