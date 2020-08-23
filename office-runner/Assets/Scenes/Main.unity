@@ -495,9 +495,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilesPrefabs:
-  - {fileID: -927199367670048503, guid: 4ab113427fc66df44acbe8c69717acbd, type: 3}
-  - {fileID: -927199367670048503, guid: 87730eeb642d00b4ba97c6a7334b23b9, type: 3}
-  - {fileID: -927199367670048503, guid: c4e4b30c28395f3449155836425d157f, type: 3}
+  - {fileID: -927199367670048503, guid: 4f024d3809213c1488e8e617f2601a4a, type: 3}
+  - {fileID: -927199367670048503, guid: b91330cc228314048910453091b56f9e, type: 3}
+  - {fileID: -927199367670048503, guid: 8bcc40847a8a43a40b4259cec00ed220, type: 3}
+  - {fileID: -927199367670048503, guid: 4afc750acbb564f45ba72c33fcbb2829, type: 3}
+  - {fileID: -927199367670048503, guid: 4f6a1e31061cb6b4e867057d62045e2c, type: 3}
+  - {fileID: -927199367670048503, guid: bd1e53c6463accb4fb0f4655d52ec59f, type: 3}
+  - {fileID: -927199367670048503, guid: 3c56c6b60c26dc24f8d410b0f6667012, type: 3}
+  - {fileID: -927199367670048503, guid: 990f34cafb91a5d458c49ea46044ad58, type: 3}
   tileLength: 20
 --- !u!4 &1141641137
 Transform:
